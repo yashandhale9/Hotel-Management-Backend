@@ -1,5 +1,7 @@
 package com.yash.hotelmanagement.entities;
 
+
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,14 +17,13 @@ public class Room {
     @Column(nullable = false)
     private String roomNumber;
 
-    private String type;        // Deluxe, AC, Non-AC
+    @Enumerated(EnumType.STRING)
+    private RoomType type;
+
     private Double price;
     private Boolean available;
 
     @ManyToOne
     @JoinColumn(name = "branch_id")
-    private Branch sbranch;
-
-    public void setBranch(Branch branch) {
-    }
+    private Branch branch;
 }

@@ -2,6 +2,7 @@ package com.yash.hotelmanagement.service;
 
 import com.yash.hotelmanagement.entities.Branch;
 import com.yash.hotelmanagement.entities.Room;
+import com.yash.hotelmanagement.entities.RoomType;
 import com.yash.hotelmanagement.models.RoomRequestDTO;
 import com.yash.hotelmanagement.models.RoomResponseDTO;
 import com.yash.hotelmanagement.repository.BranchRepository;
@@ -35,7 +36,7 @@ public class RoomService {
 
         Room room = new Room();
         room.setRoomNumber(dto.getRoomNumber());
-        room.setType(dto.getType());
+        room.setType(RoomType.valueOf(dto.getType()));
         room.setPrice(dto.getPrice());
         room.setAvailable(dto.getAvailable());
         room.setBranch(branchOpt.get());
@@ -54,7 +55,7 @@ public class RoomService {
             RoomResponseDTO dto = new RoomResponseDTO();
             dto.setId(r.getId());
             dto.setRoomNumber(r.getRoomNumber());
-            dto.setType(r.getType());
+            dto.setType(String.valueOf(r.getType()));
             dto.setPrice(r.getPrice());
             dto.setAvailable(r.getAvailable());
             response.add(dto);

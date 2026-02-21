@@ -1,7 +1,7 @@
 server:
   port: 8080
 
-spring:
+
   datasource:
     url: jdbc:postgresql://localhost:5432/hotel_management
     username: postgres
@@ -20,3 +20,5 @@ spring:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+  application:
+    name: hotel-management

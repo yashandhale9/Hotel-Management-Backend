@@ -1,12 +1,27 @@
 package com.yash.hotelmanagement.models;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
 public class RoomRequestDTO {
     private String roomNumber;
     private String type;
+
+    @NotNull
+    @Positive
     private Double price;
-    private Boolean available;
+
+    @NotNull
+    @Min(0)
+    private Integer totalRoom;
+
+    @NotNull
+    @Min(0)
+    private Integer available;
+
+    @NotNull
     private Integer branchId;
 }

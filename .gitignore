@@ -18,3 +18,32 @@ buildNumber.properties
 
 .idea/
 *.log
+# ======================
+# Maven
+# ======================
+
+# ======================
+# IntelliJ IDEA
+# ======================
+
+*.iml
+*.iws
+*.ipr
+out/
+
+# ======================
+# VS Code
+# ======================
+.vscode/
+
+# ======================
+# OS Files
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# Environment files
+# ======================
+.env
+application-local.yml

@@ -1,4 +1,4 @@
-package com.yash.hotelmanagement.entities;
+package com.yash.hotelmanagement.enums;
 
 public enum UserRole {
     ADMIN,

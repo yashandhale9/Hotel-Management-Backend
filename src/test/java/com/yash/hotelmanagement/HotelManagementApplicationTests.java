@@ -1,4 +1,4 @@
-package com.yash.hotel_management;
+package com.yash.hotelmanagement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,5 +9,4 @@ class HotelManagementApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

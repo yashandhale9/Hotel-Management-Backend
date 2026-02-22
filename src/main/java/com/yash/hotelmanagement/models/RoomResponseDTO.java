@@ -8,5 +8,6 @@ public class RoomResponseDTO {
     private String roomNumber;
     private String type;
     private Double price;
-    private Boolean available;
+    private Integer totalRoom;
+    private Integer available;
 }

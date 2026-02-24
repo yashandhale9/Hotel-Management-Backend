@@ -7,12 +7,15 @@ import lombok.Data;
 
 @Data
 public class RoomRequestDTO {
-    private String roomNumber;
+
     private String type;
 
     @NotNull
     @Positive
     private Double price;
+
+    @NotNull
+    private Integer branch_id;
 
     @NotNull
     @Min(0)
@@ -22,6 +25,5 @@ public class RoomRequestDTO {
     @Min(0)
     private Integer available;
 
-    @NotNull
-    private Integer branchId;
+
 }

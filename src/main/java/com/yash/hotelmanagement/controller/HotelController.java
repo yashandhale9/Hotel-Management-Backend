@@ -26,21 +26,30 @@ public class HotelController {
         this.hotelService = hotelService;
     }
 
-    @PostMapping
-    public ResponseEntity<ApiResponse<Object>> create(@Valid @RequestBody HotelRequestDTO dto) {
+
+    @PostMapping("/create")
+    public ResponseEntity<ApiResponse<HotelResponseDTO>> create(
+            @Valid @RequestBody HotelRequestDTO dto) {
+
         logger.info("Creating hotel {}", dto.getName());
-        String res = hotelService.createHotel(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.builder()
-                .success(true)
-                .message(res)
-                .data(null)
-                .timestamp(LocalDateTime.now())
-                .build());
+
+        HotelResponseDTO res = hotelService.createHotel(dto);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.<HotelResponseDTO>builder()
+                        .success(true)
+                        .message("Hotel Created Successfully")
+                        .data(res)
+                        .timestamp(LocalDateTime.now())
+                        .build());
     }
 
-    @GetMapping
+
+    @GetMapping("/get")
     public ResponseEntity<ApiResponse<List<HotelResponseDTO>>> get() {
+
         List<HotelResponseDTO> list = hotelService.getHotels();
+
         return ResponseEntity.ok(ApiResponse.<List<HotelResponseDTO>>builder()
                 .success(true)
                 .message("Hotels fetched")
@@ -49,9 +58,12 @@ public class HotelController {
                 .build());
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<HotelResponseDTO>> getById(@PathVariable Integer id) {
+
         HotelResponseDTO dto = hotelService.getHotelById(id);
+
         return ResponseEntity.ok(ApiResponse.<HotelResponseDTO>builder()
                 .success(true)
                 .message("Hotel fetched")
@@ -60,9 +72,14 @@ public class HotelController {
                 .build());
     }
 
+
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<HotelResponseDTO>> update(@PathVariable Integer id, @Valid @RequestBody HotelRequestDTO dto) {
+    public ResponseEntity<ApiResponse<HotelResponseDTO>> update(
+            @PathVariable Integer id,
+            @Valid @RequestBody HotelRequestDTO dto) {
+
         HotelResponseDTO updated = hotelService.updateHotel(id, dto);
+
         return ResponseEntity.ok(ApiResponse.<HotelResponseDTO>builder()
                 .success(true)
                 .message("Hotel updated")
@@ -71,14 +88,18 @@ public class HotelController {
                 .build());
     }
 
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Object>> delete(@PathVariable Integer id) {
+
         hotelService.deleteHotel(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(ApiResponse.builder()
-                .success(true)
-                .message("Hotel deleted")
-                .data(null)
-                .timestamp(LocalDateTime.now())
-                .build());
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                .body(ApiResponse.builder()
+                        .success(true)
+                        .message("Hotel deleted")
+                        .data(null)
+                        .timestamp(LocalDateTime.now())
+                        .build());
     }
 }

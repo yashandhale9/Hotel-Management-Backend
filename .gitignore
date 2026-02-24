@@ -1,3 +1,4 @@
+# Maven
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -7,43 +8,31 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-# https://maven.apache.org/wrapper/#usage-without-binary-jar
-.mvn/wrapper/maven-wrapper.jar
 
-# Eclipse m2e generated files
-# Eclipse Core
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.vscode/
 .project
-# JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-.idea/
+# Logs
 *.log
-# ======================
-# Maven
-# ======================
+logs/
 
-# ======================
-# IntelliJ IDEA
-# ======================
-
-*.iml
-*.iws
-*.ipr
-out/
-
-# ======================
-# VS Code
-# ======================
-.vscode/
-
-# ======================
-# OS Files
-# ======================
+# OS
 .DS_Store
 Thumbs.db
 
-# ======================
-# Environment files
-# ======================
+# Env
 .env
 application-local.yml
+
+# Build
+*.class
+*.jar
+*.war
+*.ear

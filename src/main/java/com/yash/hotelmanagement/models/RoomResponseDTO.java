@@ -5,9 +5,15 @@ import lombok.Data;
 @Data
 public class RoomResponseDTO {
     private Integer id;
-    private String roomNumber;
+    private Integer branch_id;
     private String type;
     private Double price;
     private Integer totalRoom;
     private Integer available;
+
+    private String branchName;
+    private String hotelName;
+
+
+
 }

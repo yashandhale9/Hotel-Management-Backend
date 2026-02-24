@@ -1,5 +1,6 @@
 package com.yash.hotelmanagement.models;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,11 +22,17 @@ public class BranchRequestDTO {
 
     private Double rating;
 
-    @Pattern(regexp = "^\\d{10,15}$", message = "phone must be 10 to 15 digits")
+    @NotBlank(message = "Phone cannot be empty")
+    @Size(min = 10, max = 10, message = "Phone must be 10 digits")
+    @Pattern(regexp = "\\d{10}", message = "Phone must contain digits only")
     private String phone;
 
     @Email
     private String email;
+
+
+    @Column(name = "image_url")
+    private String imgUrl;
 
     @NotNull(message = "hotelId is required")
     private Integer hotelId;

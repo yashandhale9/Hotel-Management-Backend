@@ -26,7 +26,7 @@ public class BranchController {
         this.branchService = branchService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<ApiResponse<Object>> create(@Valid @RequestBody BranchRequestDTO dto) {
         logger.info("Creating branch {} for hotel {}", dto.getBranchName(), dto.getHotelId());
         String res = branchService.createBranch(dto);
@@ -38,7 +38,7 @@ public class BranchController {
                 .build());
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public ResponseEntity<ApiResponse<List<BranchResponseDTO>>> get() {
         List<BranchResponseDTO> list = branchService.getBranches();
         return ResponseEntity.ok(ApiResponse.<List<BranchResponseDTO>>builder()

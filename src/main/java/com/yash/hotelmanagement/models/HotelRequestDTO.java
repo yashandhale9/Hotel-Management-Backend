@@ -1,20 +1,20 @@
 package com.yash.hotelmanagement.models;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class HotelRequestDTO {
+
     @NotBlank(message = "Hotel name is required")
-    @Size(max = 100)
+    @Size(max = 100, message = "Hotel name max 100 characters")
     private String name;
 
-    private String imageURL;
+    @Size(max = 500, message = "Description max 500 characters")
+    private String description;
 
-    @Min(0)
-    @Max(5)
-    private Integer rating;
+    @Email(message = "Email must be valid")
+    private String email;
 }

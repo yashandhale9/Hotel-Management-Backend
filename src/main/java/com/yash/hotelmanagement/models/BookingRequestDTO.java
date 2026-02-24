@@ -15,6 +15,10 @@ public class BookingRequestDTO {
     private Integer userId;
 
     @NotNull
+    @PositiveOrZero
+    private Integer numberOfRooms;
+
+    @NotNull
     @FutureOrPresent
     private LocalDate checkInDate;
 

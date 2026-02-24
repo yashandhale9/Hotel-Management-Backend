@@ -26,27 +26,51 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public ResponseEntity<ApiResponse<List<UserResponseDTO>>> getUsers() {
-        List<UserResponseDTO> users = userService.getUsers();
-        return ResponseEntity.ok(ApiResponse.<List<UserResponseDTO>>builder()
+
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<UserResponseDTO>> login(
+            @Valid @RequestBody com.yash.hotelmanagement.models.LoginRequestDTO dto) {
+
+        UserResponseDTO user = userService.login(dto.getEmail(), dto.getPassword());
+
+        return ResponseEntity.ok(ApiResponse.<UserResponseDTO>builder()
                 .success(true)
-                .message("Users fetched")
-                .data(users)
+                .message("Login successful")
+                .data(user)
                 .timestamp(LocalDateTime.now())
                 .build());
     }
 
-    @PostMapping
-    public ResponseEntity<ApiResponse<Object>> createUser(@Valid @RequestBody UserRequestDTO dto) {
+    @GetMapping("/get")
+    public ResponseEntity<ApiResponse<List<UserResponseDTO>>> getUsers() {
+
+        List<UserResponseDTO> users = userService.getUsers();
+
+        return ResponseEntity.ok(
+                ApiResponse.<List<UserResponseDTO>>builder()
+                        .success(true)
+                        .message("Users fetched successfully")
+                        .data(users)
+                        .timestamp(LocalDateTime.now())
+                        .build()
+        );
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<ApiResponse<UserResponseDTO>> createUser(
+            @Valid @RequestBody UserRequestDTO dto) {
+
         logger.info("Creating user {}", dto.getEmail());
-        String res = userService.createUser(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.builder()
-                .success(true)
-                .message(res)
-                .data(null)
-                .timestamp(LocalDateTime.now())
-                .build());
+
+        UserResponseDTO user = userService.createUser(dto);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.<UserResponseDTO>builder()
+                        .success(true)
+                        .message("User created successfully")
+                        .data(null)
+                        .timestamp(LocalDateTime.now())
+                        .build());
     }
 
     @GetMapping("/{id}")

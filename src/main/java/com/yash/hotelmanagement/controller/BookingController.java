@@ -26,7 +26,7 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<ApiResponse<Object>> create(@Valid @RequestBody BookingRequestDTO dto) {
         logger.info("Creating booking for user {}", dto.getUserId());
         String result = bookingService.createBooking(dto);
@@ -39,7 +39,7 @@ public class BookingController {
                         .build());
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public ResponseEntity<ApiResponse<List<BookingResponseDTO>>> get() {
         List<BookingResponseDTO> list = bookingService.getBookings();
         return ResponseEntity.ok(ApiResponse.<List<BookingResponseDTO>>builder()
@@ -50,15 +50,19 @@ public class BookingController {
                 .build());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<BookingResponseDTO>> getById(@PathVariable Integer id) {
-        BookingResponseDTO dto = bookingService.getBookingById(id);
-        return ResponseEntity.ok(ApiResponse.<BookingResponseDTO>builder()
-                .success(true)
-                .message("Booking fetched")
-                .data(dto)
-                .timestamp(LocalDateTime.now())
-                .build());
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<ApiResponse<List<BookingResponseDTO>>> getByUser(@PathVariable Integer userId) {
+
+        List<BookingResponseDTO> list = bookingService.getBookingsByUser(userId);
+
+        return ResponseEntity.ok(
+                ApiResponse.<List<BookingResponseDTO>>builder()
+                        .success(true)
+                        .message("Bookings fetched")
+                        .data(list)
+                        .timestamp(LocalDateTime.now())
+                        .build()
+        );
     }
 
     @PutMapping("/{id}")
@@ -68,6 +72,30 @@ public class BookingController {
                 .success(true)
                 .message("Booking updated")
                 .data(updated)
+                .timestamp(LocalDateTime.now())
+                .build());
+    }
+
+
+    @PutMapping("/{id}/confirm")
+    public ResponseEntity<ApiResponse<Object>> confirmBooking(@PathVariable Integer id) {
+        String msg = bookingService.confirmBooking(id);
+        return ResponseEntity.ok(ApiResponse.builder()
+                .success(true)
+                .message(msg)
+                .data(null)
+                .timestamp(LocalDateTime.now())
+                .build());
+    }
+
+
+    @PutMapping("/{id}/cancel")
+    public ResponseEntity<ApiResponse<Object>> cancelBooking(@PathVariable Integer id) {
+        String msg = bookingService.cancelBooking(id);
+        return ResponseEntity.ok(ApiResponse.builder()
+                .success(true)
+                .message(msg)
+                .data(null)
                 .timestamp(LocalDateTime.now())
                 .build());
     }

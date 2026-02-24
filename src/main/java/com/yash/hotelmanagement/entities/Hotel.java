@@ -3,10 +3,7 @@ package com.yash.hotelmanagement.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -19,24 +16,23 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @NotBlank
-    @Size(max = 25)
-    @Column(nullable = false, length = 25)
+    @NotBlank(message = "Hotel name is required")
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Size(max = 255)
-    @Column(length = 255)
+    @Column(length = 500)
     private String description;
 
-    @Email
+    @Email(message = "Email must be valid")
+    @Column(unique = true)
     private String email;
 
-    private String imageURL;
-
-    private Integer rating;
-
-    @CreationTimestamp
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    // automatically set createdAt when saving new hotel
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
 }

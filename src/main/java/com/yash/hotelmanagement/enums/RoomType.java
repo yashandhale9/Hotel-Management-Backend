@@ -1,8 +1,7 @@
 package com.yash.hotelmanagement.enums;
 
 public enum RoomType {
-    SINGLE,
-    DOUBLE,
+    STANDARD,
     DELUXE,
     SUITE
 }

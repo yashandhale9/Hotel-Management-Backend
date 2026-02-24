@@ -45,9 +45,11 @@ public class Branch {
     @Column(name = "image_url")
     private String imageUrl;
 
-    // MANY BRANCHES → ONE HOTEL
+    // MANY BRANCHES - ONE HOTEL
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hotel_id", referencedColumnName = "id", nullable = false)
     private Hotel hotel;
+
+
 }

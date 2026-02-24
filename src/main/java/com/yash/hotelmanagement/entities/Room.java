@@ -16,8 +16,6 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
-    private String roomNumber;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -42,4 +40,6 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id", referencedColumnName = "id", nullable = false)
     private Branch branch;
+
+
 }
